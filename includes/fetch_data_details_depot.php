@@ -992,12 +992,12 @@ if ($file_used == "sql_table") {
     }
 
 
-    //print_r($order_items);
+    // print_r($order_items);
 
     $this->results = $order_items;
 
 
-    //echo "<pre>" . print_r($this->results) . "</pre>";
+    // echo "<pre>" . print_r($this->results) . "</pre>";
 
     $items_render = array();
 
@@ -1955,32 +1955,6 @@ if ($file_used == "sql_table") {
                         $pw_table_value .= urldecode($attributes[$key]);
                     }
                 }
-                
-                // $sizes = array(
-                //     "1-عينة" => 0.5,
-                //     "¼-تولة" => 3,
-                //     "1-2-تولة" => 6,
-                //     "1-توله" => 12,
-                //     "3-تولات" => 37,
-                //     "5-تولات" => 61.5,
-                //     "15-تولة" => 182.5,
-                //     "50-جرام" => 51,
-                //     "100-جرام" => 102,
-                //     "250-جرام" => 253,
-                //     "500-جرام" => 505,
-                //     "1000-جرام" => 1005,
-                //     "كيس-1-كيلو" => 1005,
-                //     "3-كيلو" => 3015,
-                //     "علبة-10-جم" => 10,
-                //     "علبتينx-10جم" => 20,
-                //     "4-علب-x10-جم" => 40,
-                //     "z-مجموعة-ربع-تولة" => 0,
-                //     "z-مجموعة-سدس-تولة" => 0,
-                //     "مجموعة" => 1,
-                //     "مجموعة-ربع-تولة" => 3,
-                //     "مجموعة-سدس-تولة" => 2,
-                //     "مجموعة -تولة" => 12,
-                // );
 
                 $qty = $items->product_quantity;
                 if ($items->fee) {
@@ -1996,7 +1970,9 @@ if ($file_used == "sql_table") {
                     $display_class = 'display:none';
                 }
                 $datatable_value .= ("<td style='" . $display_class . "'>");
-                $datatable_value .= $sizes[$pw_table_value];
+                $datatable_value .= $this->sizes[$pw_table_value];
+                $this->t_products[$sku][$pw_table_value] += $qty;
+                $related = $pw_table_value;
                 $datatable_value .= ("</td>");
 
                 //Qty.
@@ -2605,32 +2581,6 @@ if ($file_used == "sql_table") {
                                     $pw_table_value .= urldecode($attributes[$key]);
                                 }
                             }
-                            
-                            // $sizes = array(
-                            //     "1-عينة" => 0.5,
-                            //     "¼-تولة" => 3,
-                            //     "1-2-تولة" => 6,
-                            //     "1-توله" => 12,
-                            //     "3-تولات" => 37,
-                            //     "5-تولات" => 61.5,
-                            //     "15-تولة" => 182.5,
-                            //     "50-جرام" => 51,
-                            //     "100-جرام" => 102,
-                            //     "250-جرام" => 253,
-                            //     "500-جرام" => 505,
-                            //     "1000-جرام" => 1005,
-                            //     "كيس-1-كيلو" => 1005,
-                            //     "3-كيلو" => 3015,
-                            //     "علبة-10-جم" => 10,
-                            //     "علبتينx-10جم" => 20,
-                            //     "4-علب-x10-جم" => 40,
-                            //     "z-مجموعة-ربع-تولة" => 0,
-                            //     "z-مجموعة-سدس-تولة" => 0,
-                            //     "مجموعة" => 1,
-                            //     "مجموعة-ربع-تولة" => 3,
-                            //     "مجموعة-سدس-تولة" => 2,
-                            //     "مجموعة -تولة" => 12,
-                            // );
 
                             $display_class = '';
                             if ($this->table_cols[$index_cols++]['status'] == 'hide') {
@@ -2638,6 +2588,10 @@ if ($file_used == "sql_table") {
                             }
                             $datatable_value .= ("<td style='" . $display_class . "'>");
                             $datatable_value .= $variationName;
+                            // $this->t_products[$product_sku][$related] += $product_qtyy;
+                            $this->t_products[$sku][$product_sku][$related] += $product_qtyy;
+                            $this->t_products[$sku][$related] -= $product_qtyy;
+                            $related = '';
                             $datatable_value .= ("</td>");
 
                             //Qty.
@@ -2646,7 +2600,8 @@ if ($file_used == "sql_table") {
                                 $display_class = 'display:none';
                             }
                             $datatable_value .= ("<td style='" . $display_class . "'>");
-                            $datatable_value .= $product_qtyy;
+                            $datatable_value .= $qty;
+                            // $datatable_value .= $product_qtyy;
 
                             ////ADDE IN VER4.0
                             /// TOTAL ROWS
@@ -3210,32 +3165,6 @@ if ($file_used == "sql_table") {
                             $pw_table_value .= urldecode($attributes[$key]);
                         }
                     }
-                    
-                    // $sizes = array(
-                    //     "1-عينة" => 0.5,
-                    //     "¼-تولة" => 3,
-                    //     "1-2-تولة" => 6,
-                    //     "1-توله" => 12,
-                    //     "3-تولات" => 37,
-                    //     "5-تولات" => 61.5,
-                    //     "15-تولة" => 182.5,
-                    //     "50-جرام" => 51,
-                    //     "100-جرام" => 102,
-                    //     "250-جرام" => 253,
-                    //     "500-جرام" => 505,
-                    //     "1000-جرام" => 1005,
-                    //     "كيس-1-كيلو" => 1005,
-                    //     "3-كيلو" => 3015,
-                    //     "علبة-10-جم" => 10,
-                    //     "علبتينx-10جم" => 20,
-                    //     "4-علب-x10-جم" => 40,
-                    //     "z-مجموعة-ربع-تولة" => 0,
-                    //     "z-مجموعة-سدس-تولة" => 0,
-                    //     "مجموعة" => 1,
-                    //     "مجموعة-ربع-تولة" => 3,
-                    //     "مجموعة-سدس-تولة" => 2,
-                    //     "مجموعة -تولة" => 12,
-                    // );
 
                     $qty = $items->product_quantity;
                     if ($items->fee) {
@@ -3251,7 +3180,9 @@ if ($file_used == "sql_table") {
                         $display_class = 'display:none';
                     }
                     $datatable_value .= ("<td style='" . $display_class . "'>");
-                    $datatable_value .= $sizes[$pw_table_value];
+                    $datatable_value .= $this->sizes[$pw_table_value];
+                    $this->t_products[$sku][$pw_table_value] += $qty;
+                    $related = $pw_table_value;
                     $datatable_value .= ("</td>");
 
                     //Qty.
@@ -3871,32 +3802,6 @@ if ($file_used == "sql_table") {
                                         $pw_table_value .= urldecode($attributes[$key]);
                                     }
                                 }
-                                
-                                // $sizes = array(
-                                //     "1-عينة" => 0.5,
-                                //     "¼-تولة" => 3,
-                                //     "1-2-تولة" => 6,
-                                //     "1-توله" => 12,
-                                //     "3-تولات" => 37,
-                                //     "5-تولات" => 61.5,
-                                //     "15-تولة" => 182.5,
-                                //     "50-جرام" => 51,
-                                //     "100-جرام" => 102,
-                                //     "250-جرام" => 253,
-                                //     "500-جرام" => 505,
-                                //     "1000-جرام" => 1005,
-                                //     "كيس-1-كيلو" => 1005,
-                                //     "3-كيلو" => 3015,
-                                //     "علبة-10-جم" => 10,
-                                //     "علبتينx-10جم" => 20,
-                                //     "4-علب-x10-جم" => 40,
-                                //     "z-مجموعة-ربع-تولة" => 0,
-                                //     "z-مجموعة-سدس-تولة" => 0,
-                                //     "مجموعة" => 1,
-                                //     "مجموعة-ربع-تولة" => 3,
-                                //     "مجموعة-سدس-تولة" => 2,
-                                //     "مجموعة -تولة" => 12,
-                                // );
 
                                 $display_class = '';
                                 if ($this->table_cols[$index_cols++]['status'] == 'hide') {
@@ -3904,6 +3809,10 @@ if ($file_used == "sql_table") {
                                 }
                                 $datatable_value .= ("<td style='" . $display_class . "'>");
                                 $datatable_value .= $variationName;
+                                // $this->t_products[$product_sku][$related] += $product_qtyy;
+                                $this->t_products[$sku][$product_sku][$related] += $product_qtyy;
+                                $this->t_products[$sku][$related] -= $product_qtyy;
+                                $related = '';
                                 $datatable_value .= ("</td>");
 
                                 //Qty.
@@ -3912,7 +3821,8 @@ if ($file_used == "sql_table") {
                                     $display_class = 'display:none';
                                 }
                                 $datatable_value .= ("<td style='" . $display_class . "'>");
-                                $datatable_value .= $product_qtyy;
+                                $datatable_value .= $qty;
+                                // $datatable_value .= $product_qtyy;
 
                                 ////ADDE IN VER4.0
                                 /// TOTAL ROWS
@@ -4700,6 +4610,24 @@ if ($file_used == "sql_table") {
             $datatable_value_total .= "<td>" . (($profit_amnt) == 0 ? $this->price(0) : $this->price($profit_amnt)) . "</td>";
         }
         $datatable_value_total .= ("</tr>");
+        ?>
+        <button onClick="printdiv('tproducts');" type="button" value="Print" class="button-secondary"><i
+                        class="fa fa-print"></i><span><?php echo esc_html__('Print',
+                        __PW_REPORT_WCREPORT_TEXTDOMAIN__); ?></span></button>
+        <?php
+        echo "<div id='tproducts'><pre>".print_r($this->t_products, true)."</pre></div>";
+        ?>
+        <script>
+        function printdiv(elem) {
+            var header_str = '<html><head><title>' + document.title  + '</title></head><body>';
+            var footer_str = '</body></html>';
+            var new_str = document.getElementById(elem).innerHTML;
+            var old_str = document.body.innerHTML;
+            document.body.innerHTML = header_str + new_str + footer_str;
+            window.print();
+        }
+        </script>
+        <?php
     } else {
         $table_name_total = $table_name . "_no_items";
 

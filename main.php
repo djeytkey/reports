@@ -194,32 +194,6 @@ if ( ! class_exists('pw_report_wcreport_class')) {
         public $our_menu = '';
         public $our_menu_fav = '';
 
-        public $sizes = array(
-            "1-عينة" => 0.5,
-            "¼-تولة" => 3,
-            "1-2-تولة" => 6,
-            "1-توله" => 12,
-            "3-تولات" => 37,
-            "5-تولات" => 61.5,
-            "15-تولة" => 182.5,
-            "50-جرام" => 51,
-            "100-جرام" => 102,
-            "250-جرام" => 253,
-            "500-جرام" => 505,
-            "1000-جرام" => 1005,
-            "كيس-1-كيلو" => 1005,
-            "3-كيلو" => 3015,
-            "علبة-10-جم" => 10,
-            "علبتينx-10جم" => 20,
-            "4-علب-x10-جم" => 40,
-            "z-مجموعة-ربع-تولة" => 0,
-            "z-مجموعة-سدس-تولة" => 0,
-            "مجموعة" => 1,
-            "مجموعة-ربع-تولة" => 3,
-            "مجموعة-سدس-تولة" => 2,
-            "مجموعة -تولة" => 12,
-        );
-
         ////ADDED IN VER4.0
         //CHECK LICENSE & UPDATE
         public $plugin_slug = '';
@@ -253,8 +227,32 @@ if ( ! class_exists('pw_report_wcreport_class')) {
             $this->license_key   = get_option(__PW_REPORT_WCREPORT_FIELDS_PERFIX__ . 'activate_purchase_code');
             $this->email         = get_option(__PW_REPORT_WCREPORT_FIELDS_PERFIX__ . 'activate_email', '');
             $this->api_url       = 'https://proword.net/Update_Plugins/';
-            $this->sizes         = $sizes;
-
+            $this->sizes         = array(
+                "1-عينة" => 0.5,
+                "¼-تولة" => 3,
+                "1-2-تولة" => 6,
+                "1-توله" => 12,
+                "3-تولات" => 37,
+                "5-تولات" => 61.5,
+                "15-تولة" => 182.5,
+                "50-جرام" => 51,
+                "100-جرام" => 102,
+                "250-جرام" => 253,
+                "500-جرام" => 505,
+                "1000-جرام" => 1005,
+                "كيس-1-كيلو" => 1005,
+                "3-كيلو" => 3015,
+                "علبة-10-جم" => 10,
+                "علبتينx-10جم" => 20,
+                "4-علب-x10-جم" => 40,
+                "z-مجموعة-ربع-تولة" => 0,
+                "z-مجموعة-سدس-تولة" => 0,
+                "مجموعة" => 1,
+                "مجموعة-ربع-تولة" => 3,
+                "مجموعة-سدس-تولة" => 2,
+                "مجموعة -تولة" => 12,
+            );
+            $this->t_products    = array();
 
             add_action('admin_init', array($this, 'pw_standalone_report'));
             //add_filter('login_redirect', array($this, 'my_login_redirect'), 10, 3);
